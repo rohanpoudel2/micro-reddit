@@ -1,0 +1,24 @@
+<h1>
+    Posts
+</h1>
+
+<%= render "form", post: @new_post %>
+
+<% @posts.each do |post| %>
+    <div>
+        <strong> 
+            <%= post.title %>
+        </strong>
+        <p>
+            <%= post.body %>
+        </p>
+        <% if current_user == post.user %>
+            <div>
+                <%= link_to 'Edit Post', edit_user_post_path(post) %>
+                <%= button_to 'Delete Post', [:user, post], method: :delete, data: { turbo_confirm: "Are you sure ?" }  %>
+            <div>
+        <% end %>
+    </div>
+<% end %>
+
+<%console%>
