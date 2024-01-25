@@ -12,10 +12,7 @@ class User::PostsController < UserController
         if @post.save
             redirect_to user_root_path, notice: "Post successfully created"
         else
-            @posts = Post.all
-            @new_post = @post
-            @new_comment =
-            render :index, status: :unprocessable_entity
+            redirect_to user_root_path, alert: @post.errors.full_messages.to_sentence
         end
     end
 

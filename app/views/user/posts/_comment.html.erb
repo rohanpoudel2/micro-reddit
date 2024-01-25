@@ -1,10 +1,12 @@
-<span> <%= comment.user.email %> </span>
 <p>
-  <%= comment.body %>
+  <%= comment.user.email %>: <%= comment.body %>
 </p>
 <% if comment.user == current_user %>
   <div>
-    <%= link_to 'Edit Comment', edit_user_comment_path(comment)  %>
-    <%= button_to 'Delete Comment', [:user, comment], method: :delete, data: {turbo_confirm: "Are you sure ?"} %>
+    <%= link_to 'Edit Comment', edit_user_post_comment_path(comment.post, comment)  %>
+    <%= button_to 'Delete Comment', [:user, comment.post, comment], method: :delete, data: {turbo_confirm: "Are you sure ?"} %>
   </div>
 <% end %>
+<div>
+  <%= render "commentform", post: comment.post, comment: comment, label: "Reply to this comment" %>
+</div>

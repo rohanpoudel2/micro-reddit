@@ -1,0 +1,9 @@
+<%= form_with model: [:user, post, comment] do |form| %>
+  <%= render "error", form: form %>
+  <%= form.hidden_field :parent_id, value: (comment.id if comment.persisted?) %>
+  <div>
+    <%= form.label :body, label %>
+    <%= form.text_field :body %>
+  </div>
+  <%= form.button %>
+<% end %>

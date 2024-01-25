@@ -12,13 +12,7 @@
     <div>
   <% end %>
   <div>---------</div>
-  <%= form_with model: [:user, comment] do |form| %>
-    <%= render "error", form: form %>
-    <div>
-      <%= form.label :body %>
-      <%= form.text_field :body %>
-    </div>
-  <% end %>
+  <%= render "commentform", post: post, comment: comment, label: "Your Comment" %>
   <% unless post.comments.count.zero? %>
     <div>Comments</div>
   <% end %>

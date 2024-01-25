@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   namespace :user do
-    resources :posts, only: %i[edit update destory create]
-    resources :comments, only: %i[edit update destroy create]
+    resources :posts, only: %i[edit update destory create] do
+      resources :comments, only: %i[edit update destroy create]
+    end
   end
 
   devise_for :users

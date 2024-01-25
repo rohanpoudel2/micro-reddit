@@ -5,5 +5,5 @@
 <%= render "form", post: @new_post %>
 
 <% @posts.each do |post| %>
-    <%= render "post", post: post %>
+    <%= render "post", post: post, comment: @comment %>
 <% end %>
