@@ -1,21 +1,23 @@
 class User::PostsController < UserController
-
     before_action :set_post, except: [:index, :create]
 
     def index
         @posts = Post.all
         @new_post = Post.new
+        @comment = Comment.new
     end
 
     def create
-        @post = Post.new(post_params)
+        @post = current_user.posts.build(post_params)
         if @post.save
-          redirect_to user_root_path, notice: "Post successfully created"
+            redirect_to user_root_path, notice: "Post successfully created"
         else
-          render :index, notice: "Something went wrong"
+            @posts = Post.all
+            @new_post = @post
+            @new_comment =
+            render :index, status: :unprocessable_entity
         end
     end
-    
 
     def edit
     end
@@ -35,12 +37,12 @@ class User::PostsController < UserController
             redirect_to user_root_path, notice: "Something went wrong"
         end
     end
-    
+
 
     private
 
     def post_params
-        params.require(:post).permit(:title, :body)
+        params.require(:post).permit(:title, :body, :user_id)
     end
 
     def set_post

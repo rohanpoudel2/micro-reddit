@@ -1,0 +1,28 @@
+<div>
+  <strong>
+    <%= post.title %>
+  </strong>
+  <p>
+    <%= post.body %>
+  </p>
+  <% if current_user == post.user %>
+    <div>
+      <%= link_to 'Edit Post', edit_user_post_path(post) %>
+      <%= button_to 'Delete Post', [:user, post], method: :delete, data: { turbo_confirm: "Are you sure ?" }  %>
+    <div>
+  <% end %>
+  <div>---------</div>
+  <%= form_with model: [:user, comment] do |form| %>
+    <%= render "error", form: form %>
+    <div>
+      <%= form.label :body %>
+      <%= form.text_field :body %>
+    </div>
+  <% end %>
+  <% unless post.comments.count.zero? %>
+    <div>Comments</div>
+  <% end %>
+  <% post.comments.each do |comment| %>
+    <%= render "comment", comment: comment %>
+  <% end %>
+</div>

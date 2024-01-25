@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
   namespace :user do
-    resources :posts, only: [:edit, :update, :destory, :create]
+    resources :posts, only: %i[edit update destory create]
+    resources :comments, only: %i[edit update destroy create]
   end
 
   devise_for :users
-  
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   authenticated :user do
@@ -13,6 +14,6 @@ Rails.application.routes.draw do
   end
 
 
-  root "home#index"  
-  
+  root "home#index"
+
 end
