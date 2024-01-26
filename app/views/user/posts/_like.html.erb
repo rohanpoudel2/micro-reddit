@@ -1,0 +1,5 @@
+<% if current_user && current_user.likes.exists?(post_id: post.id) %>
+  <%= button_to 'Unlike', user_post_like_path(post, id: current_user.likes.find_by(post_id: post.id).id), method: :delete, data: { turbo_confirm: "Are you sure you want to unlike this post?" } %>
+<% else %>
+  <%= button_to 'Like', user_post_likes_path(post), method: :post %>
+<% end %>

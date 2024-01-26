@@ -5,6 +5,11 @@
   <p>
     <%= post.body %>
   </p>
+  <div>
+    <span>
+      <%= render 'like', post: post %>
+    </span>
+  </div>
   <% if current_user == post.user %>
     <div>
       <%= link_to 'Edit Post', edit_user_post_path(post) %>
@@ -12,7 +17,7 @@
     <div>
   <% end %>
   <div>---------</div>
-  <%= render "commentform", post: post, comment: comment, label: "Your Comment" %>
+  <%= render "commentform", post: post, comment: Comment.new(parent_id: nil), label: "Your Comment" %>
   <% unless post.comments.count.zero? %>
     <div>Comments</div>
   <% end %>

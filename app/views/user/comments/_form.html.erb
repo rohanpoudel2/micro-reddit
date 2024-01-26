@@ -1,0 +1,8 @@
+<%= form_with model: [:user, comment.post, comment] do |form| %>
+  <%= render "shared/error", form: form %>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_field :body %>
+  </div>
+  <%= form.button %>
+<% end %>

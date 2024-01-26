@@ -1,4 +1,4 @@
-<p>
+<p class="<%= comment.parent_id.present? ? 'nested-comment' : '' %>">
   <%= comment.user.email %>: <%= comment.body %>
 </p>
 <% if comment.user == current_user %>
@@ -7,6 +7,6 @@
     <%= button_to 'Delete Comment', [:user, comment.post, comment], method: :delete, data: {turbo_confirm: "Are you sure ?"} %>
   </div>
 <% end %>
-<div>
-  <%= render "commentform", post: comment.post, comment: comment, label: "Reply to this comment" %>
+<div class="<%= comment.parent_id.present? ? 'nested-comment-form' : '' %>">
+  <%= render "commentform", post: comment.post, comment: Comment.new(parent_id: comment.id), label: "Reply to this comment" %>
 </div>
